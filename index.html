@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html class="">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1,
+        maximum-scale=1, user-scalable=no">
+    <meta name="description" content="vue sampel" />
+	    <meta name="keywords" content="vue_sample" />
+	    <meta name="author" content="wonawona" />
+	<title>vue_sample</title>
+	
+	    <link rel="canonical" href="https://wonnana.github.io/">
+
+    <!-- OpenGraph meta tags -->
+    <meta property="og:title" content="vue_sample">
+    <meta property="og:url" content="">
+    <meta property="og:site_name" content="vue_sample">
+    <meta property="og:description" content="vue_sample">
+  
+        <!--<meta property="og:type" content="blog">-->
+        <!--<meta property="og:image" content="">-->
+    
+    <!--<link rel='shortcut icon' href='/info/img/favicon/ws_p32.png'>-->
+    <!--<link rel="icon" href="/info/img/favicon/ws_p16.png" sizes="16x16">-->
+    <!--<link rel="icon" href="/info/img/favicon/ws_p32.png" sizes="32x32">-->
+        
+    <link rel="stylesheet" href="./css/font.css">
+    <link rel="stylesheet" href="./css/grid.css">
+    <link rel="stylesheet" href="./css/aminate.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Share+Tech+Mono" rel="stylesheet">
+	
+	<style>
+    html {
+        overflow: scroll;
+        overflow-x: hidden;
+    }
+    ::-webkit-scrollbar {
+        width: 0px;  /* remove scrollbar space */
+        background: transparent;  /* optional: just make scrollbar invisible */
+    }
+        /* optional: show position indicator in red */
+    ::-webkit-scrollbar-thumb {
+        background: #FF0000;
+    }
+    html,body {
+        height: 100%;
+    }
+    body {
+        background: #0f3854;
+        background: radial-gradient(ellipse at center,  #0a2e38  0%, #000000 70%);
+        background-size: 100%;
+    }
+    p {
+        margin: 0;
+        padding: 0;
+    }
+    #clock {
+        width: 100vw;
+        font-family: 'Share Tech Mono', monospace;
+        color: #ffffff;
+        text-align: center;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        color: #daf6ff;
+        font-size: 2em;
+        text-shadow: 0 0 20px rgba(10, 175, 230, 1),  0 0 20px rgba(10, 175, 230, 0);
+        .time {
+            letter-spacing: 0.05em;
+            font-size: 80px;
+            padding: 5px 0;
+        }
+        .date {
+            letter-spacing: 0.1em;
+            font-size: 24px;
+        }
+        .text {
+            letter-spacing: 0.1em;
+            font-size: 12px;
+            padding: 20px 0 0;
+        }
+    }
+    </style>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+    
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div id="clock">
+            <p class="date">{{ date }}</p>
+            <p class="time">{{ time }}</p>
+            <h2 class="text">vue_sample</h2>
+            <h3 class="text" >본화면은 Vue.js로 제작되었습니다.</h3>
+        </div>
+    </div>
+<script>
+var clock = new Vue({
+    el: '#clock',
+    data: {
+        time: '',
+        date: ''
+    }
+});
+
+var week = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+var timerID = setInterval(updateTime, 1000);
+updateTime();
+function updateTime() {
+    var cd = new Date();
+    clock.time = zeroPadding(cd.getHours(), 2) + ':' + zeroPadding(cd.getMinutes(), 2) + ':' + zeroPadding(cd.getSeconds(), 2);
+    clock.date = zeroPadding(cd.getFullYear(), 4) + '-' + zeroPadding(cd.getMonth()+1, 2) + '-' + zeroPadding(cd.getDate(), 2) + ' ' + week[cd.getDay()];
+};
+
+function zeroPadding(num, digit) {
+    var zero = '';
+    for(var i = 0; i < digit; i++) {
+        zero += '0';
+    }
+    return (zero + num).slice(-digit);
+}    
+</script>
+</body>
+</html>
